@@ -6,8 +6,6 @@
         <script src='./js/zepto/src/zepto.js' type='text/javascript' language='javascript'></script>
         <script src='./js/zepto/src/event.js' type='text/javascript' language='javascript'></script>
         <script src='./js/zepto/src/ajax.js' type='text/javascript' language='javascript'></script>
-        <script src='./js/moment/moment.js' type='text/javascript' language='javascript'></script>
-        <script src='./js/moment/lang/fr.js' type='text/javascript' language='javascript'></script>
         <script src='./js/jwerty/jwerty.js' type='text/javascript' language='javascript'></script>
 		<link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
     </head>
@@ -24,8 +22,6 @@
 		</div>
 			
 		<script>
-			moment().lang('fr');
-
 			var list = function() {
 				$.get('service.php?list', function(response) {
 					$('#content').html(response);					

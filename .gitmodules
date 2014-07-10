@@ -1,0 +1,9 @@
+[submodule "js/director"]
+	path = js/director
+	url = git://github.com/flatiron/director.git
+[submodule "js/jwerty"]
+	path = js/jwerty
+	url = git://github.com/keithamus/jwerty.git
+[submodule "js/zepto"]
+	path = js/zepto
+	url = git://github.com/madrobby/zepto

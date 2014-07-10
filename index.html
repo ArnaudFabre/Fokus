@@ -1,0 +1,122 @@
+<html>
+    <head>
+		<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+        <title>Tasks</title>
+        <script src='./js/director/build/director.js' type='text/javascript' language='javascript'></script>
+        <script src='./js/zepto/src/zepto.js' type='text/javascript' language='javascript'></script>
+        <script src='./js/zepto/src/event.js' type='text/javascript' language='javascript'></script>
+        <script src='./js/zepto/src/ajax.js' type='text/javascript' language='javascript'></script>
+        <script src='./js/moment/moment.js' type='text/javascript' language='javascript'></script>
+        <script src='./js/moment/lang/fr.js' type='text/javascript' language='javascript'></script>
+        <script src='./js/jwerty/jwerty.js' type='text/javascript' language='javascript'></script>
+		<link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
+    </head>
+    <body>
+		<div id="logo"> 
+			<h1>Fokus</h1>
+			<h4>Focus oriented task management</h4>
+		</div>
+		<div id='tasks'>
+			<input type='text' id='in' placeholder='Add (+) Remove (-) Search (/) UnFocus (~) ReFocus (!) task'/>
+			<button onclick="list();$('#in').val('')">Reset</button>
+			<ul id='content'>
+			</ul>
+		</div>
+			
+		<script>
+			moment().lang('fr');
+
+			var list = function() {
+				$.get('service.php?list', function(response) {
+					$('#content').html(response);					
+				});
+			};
+
+			var find = function(reg) {
+				$.get('service.php?find=' + reg, function(response) {
+					$('#content').html(response);					
+					$('#in').val('/'+reg);
+				});
+			};
+
+			var push = function(task) {
+				$.get('service.php?push=' + task, function(response) {
+					list();
+				});
+			};
+
+			var clear = function() {
+				$.get('service.php?clear', function(response) {
+					list();
+				});
+			}
+
+			var remove = function(entry) {
+				$.get('service.php?remove=' + entry, function(response) {
+					list();
+				});
+			}
+
+			var archive = function(entry) {
+				$.get('service.php?archive=' + entry, function(response) {
+					list();
+				});
+			}
+
+			var unarchive = function(entry) {
+				$.get('service.php?unarchive=' + entry, function(response) {
+					list();
+				});
+			}
+
+			var add = function(task) {
+				push(task);
+			};
+
+			$('#in').on( 'keypress' , function (e) {
+					if(jwerty.is('enter', e)) 
+					{
+						$firstc = $('#in').val()[0];
+						$tail = $('#in').val().substring(1);
+						switch($firstc)
+						{
+							case '+' : 
+								add($tail);
+								$('#in').val('');
+								break;
+							case '-' : 
+								remove($tail); 
+								$('#in').val('');
+								break;
+							case '~' : 
+								archive($tail); 
+								$('#in').val('');
+								break;
+							case '!' : 
+								unarchive($tail); 
+								$('#in').val('');
+								break;
+
+							case '/' : find($tail); break;
+							default: list(); break;
+						}
+					}
+				}
+			);
+
+			var routes = {
+				'/add'	: { '/:task' : { on: add } }, 
+				'/clear' : { on: clear },
+				'/find' : { '/:reg' : { on: find } },
+				'/remove' : { '/:entry' : { on: remove } },
+				'/archive' : { '/:entry' : { on: archive } },
+				'/unarchive' : { '/:entry' : { on: unarchive } },
+			};
+
+			var router = Router(routes);
+			router.init();
+
+			list();
+		</script>
+    </body>
+</html>

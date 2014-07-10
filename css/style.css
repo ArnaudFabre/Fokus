@@ -1,0 +1,72 @@
+body {
+	margin: 0;
+	background: silver;
+    color: #272727;
+}
+
+#tasks {
+	margin-top : 10px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 500px;
+}
+
+ul {
+	list-style: none;
+}
+
+li {
+	padding:5px;
+}
+
+li:hover, li:hover > div.details, .focus, .focus > div.details {
+	font-size:28px;
+}
+
+input[type=text] {
+	width : 100%;
+	height: 28px;
+    padding-left: 10px;
+    text-decoration: none;
+}
+
+button {
+	position: absolute;
+	margin-left: 10px;	
+	height: 28px;
+}
+
+#content {
+	padding:0px 20px;
+}
+
+#searchfor {
+	font-weight:bold;
+}
+
+#logo {
+	padding-left: 10%;
+}
+
+.date {
+	padding-left:20px;
+	font-weight:bold;
+	font-size:12px;
+	color:#979797;
+}
+
+.title {
+	padding-left:10px;
+}
+
+.details {
+	color:#575757;
+	font-size:12px;
+	padding : 2px 2px 2px 20px;
+}
+
+.group {
+	color:#575757;
+	font-size:16px;
+	padding:0px;
+}
